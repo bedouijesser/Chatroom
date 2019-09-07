@@ -14,6 +14,5 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  
   const users = firebase.firestore().collection('users');
-
- 
