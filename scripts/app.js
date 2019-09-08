@@ -46,18 +46,12 @@ class Chatroom {
 
     }  
 
-    async updateName(userId,docId) {
-        const response = await this.users.doc(docId).update({
-            id: userId 
-        });
-        return response;
+    async updateName(newId) {
+        this.id = newId;
     }
 
-    async updateRoom(room,docId) {
-        const response = await this.users.doc(docId).update({
-            room: room
-        });
-        return response;
+    async updateRoom(newRoom) {
+        this.room = newRoom;
     }
 }
 
@@ -66,7 +60,7 @@ class Chatroom {
 var counter = 0;    // current number of Anony users on the db
 var defUser;    // making a unique "Anony" user
 
-const defCount = async () => {  
+const defAccount = async () => {  
     
     await users.doc("defCounter").get()
         
@@ -80,7 +74,7 @@ const defCount = async () => {
             .then(()=> console.log("User added"))
             .catch(err=> console.log(err));
         
-        //  increment the defCouter value
+        //  increment the defCounter value
         defUser.users.doc("defCounter").update({
             count: counter + 1
         })
@@ -91,9 +85,39 @@ return defUser;
 
 
 //  Getting DB chat logs
-defCount().then(user =>{
+defAccount().then(user =>{
     user.getChats(data => {
         console.log(data)
     });
+    
+    // listener for the name form submit; updates defUser.id properity
+    chNameForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        defUser.updateName(chNameField.value)
+            .then(()=>console.log("Name changed"));
+    });
+
+    //  listener for the room btns; updates defUser.room properity
+    topicBtns.forEach(btn=>{
+        btn.addEventListener('click', e =>{
+            e.preventDefault();
+            
+            defUser.updateRoom(btn.id).then(()=>{
+                
+                defUser.getChats(data =>{
+                    console.log(data);
+                });
+            });
+        });
+    });
+
+    //  listener for the msg form submit; creates a new message and saves it to the DB
+    msgForm.addEventListener('submit', e=>{
+        e.preventDefault();
+
+        defUser.addMsg(msgField.value);
+    })
+
 })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));

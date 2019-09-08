@@ -1,5 +1,3 @@
-
-
 let html = `<li class="align-self-end mt-1">
 <div class="card bg-light col-12">
         <div class="card-body">
@@ -8,9 +6,3 @@ let html = `<li class="align-self-end mt-1">
     </div>
 </li>`;
     
-
-let prevId=[];
-
-
-
-
