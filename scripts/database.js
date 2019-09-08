@@ -1,4 +1,3 @@
-
 // Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
