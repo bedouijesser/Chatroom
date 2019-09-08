@@ -1,9 +1,6 @@
-const chatWindow = document.querySelector('chat-window');
-const msgForm = document.querySelector('body > div > form.input-group.mb-3');
-const msgField = document.querySelector('#msg');
-const chNameForm = document.querySelector('body > div > form.input-group.mb-2');
-const chNameField = document.querySelector('#user-name')
-const topicBtns = document.querySelectorAll('body > div > div.chat-rooms.mb-3.text-center > button');
+//  Creat a Chatroom class
+//  Creat a default accout or existing account; defAccount() / defUser
+
 
 
 // Chatroom main class
@@ -42,9 +39,7 @@ class Chatroom {
                             
                             if (change.type == 'added'){
                                 callback(change.doc.data());                
-                            } else if (change.type == 'modified'){
-                                console.log(change.doc.data())
-                            }        
+                            };     
                         });
                     });
 
@@ -59,7 +54,6 @@ class Chatroom {
         this.room = newRoom;
     }
 }
-
 
 
 
@@ -106,4 +100,3 @@ const defAccount = async () => {
     }). catch (err => console.log(err))
     return defUser;
 };
-

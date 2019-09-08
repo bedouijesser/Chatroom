@@ -1,11 +1,19 @@
 //render chat templates to the dom
 //clear the chat list when room changes
 
-let html = `<li class="align-self-end mt-1">
-<div class="card bg-light col-12">
-        <div class="card-body">
-            <p class="card-text" style="max-width: 25em" >Some text iqsdqsdddddd ddqsdqqsdsqq sdqsdqsdqsdqsdqsdqssdqsdqsdqssdnside the card</p>
-        </div>
-    </div>
-</li>`;
+class ChatUi {
+    constructor(list){
+        this.list = list
+    }
     
+    printf(user){
+        const html = `<li>
+                <span class="username">${user.id}</span>
+                <span class="message">${user.message}</span>
+                <div class="time">${user.created_at.toDate()}</div>
+        </li>`;
+        
+        chatList.innerHTML += html;
+    }
+};
+

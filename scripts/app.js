@@ -1,7 +1,19 @@
+const msgForm = document.querySelector('body > div > form.input-group.mb-3');
+const msgField = document.querySelector('#msg');
+const chNameForm = document.querySelector('body > div > form.input-group.mb-2');
+const chNameField = document.querySelector('#user-name')
+const topicBtns = document.querySelectorAll('body > div > div.chat-rooms.mb-3.text-center > button');
+const chatWindow = document.querySelector('chat-window');
+const chatList = document.querySelector('ul');
+
+
+//creating a new ChatUi instence
+const chatUi = new ChatUi(chatList);
+
 //  Getting DB chat logs
 defAccount().then(defUser =>{
     defUser.getChats(data => {
-        console.log(data)
+        chatUi.printf(data)
     });
     
     // listener for the name form submit; updates defUser.id properity
@@ -21,9 +33,9 @@ defAccount().then(defUser =>{
             e.preventDefault();
             
             defUser.updateRoom(btn.id).then(()=>{
-                
+                chatList.innerHTML=''
                 defUser.getChats(data =>{
-                    console.log(data);
+                    chatUi.printf(data);
                 });
             });
         });
@@ -33,6 +45,7 @@ defAccount().then(defUser =>{
     msgForm.addEventListener('submit', e=>{
         e.preventDefault();
 
+        defUser.users.doc(localStorage.getItem("user")).delete();
         defUser.addMsg(msgField.value);
         msgForm.reset();
         console.clear();
