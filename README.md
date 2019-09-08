@@ -1,3 +1,3 @@
 # Chatroom
-a chatroom web app using JS and firebase
-give it a try
+a chatroom web app using JS and firebase;
+Give it a try
