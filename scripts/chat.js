@@ -37,7 +37,7 @@ class Chatroom {
 
                         changes.forEach(change => {
                             
-                            if (change.type == 'added'){
+                            if (change.type == 'added' ){
                                 callback(change.doc.data());                
                             };     
                         });

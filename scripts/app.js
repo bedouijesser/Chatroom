@@ -25,6 +25,8 @@ defAccount().then(defUser =>{
                 console.log("Name changed");
                 localStorage.setItem("user",chNameField.value);
             });
+        chNameField.setAttribute('placeholder', `Your new id = ${chNameField.value}`);
+        chNameForm.reset();
     });
 
     //  listener for the room btns; updates defUser.room properity
